@@ -1,0 +1,96 @@
+import Foundation
+struct DeliveryPackage {
+    var packageID: Int
+    var destination: String
+    var priority: String
+    var status: String
+    var weight: Double {
+        didSet {
+            deliveryCharge = weight * 20
+        }
+    }
+    var deliveryCharge: Double
+    static var totalPackages = 0
+    init() {
+        packageID = 0
+        destination = "Not Assigned"
+        priority = "Normal"
+        status = "Pending"
+        weight = 0
+        deliveryCharge = 0
+        DeliveryPackage.totalPackages += 1
+    }
+    init(weight: Double) {
+        packageID = 1
+        destination = "Library"
+        priority = "Normal"
+        status = "Pending"
+        self.weight = weight
+        deliveryCharge = weight * 20
+        DeliveryPackage.totalPackages += 1
+    }
+    init(priority: String) {
+        packageID = 2
+        destination = "Hostel"
+        self.priority = priority
+        status = "Pending"
+        weight = 0
+        deliveryCharge = 0
+        DeliveryPackage.totalPackages += 1
+    }
+    func calculateBill() -> Double {
+        return deliveryCharge + (deliveryCharge * 0.18)
+    }
+    mutating func changeDestination(_ newDestination: String) {
+        destination = newDestination
+    }
+    mutating func markDelivered() {
+        status = "Delivered"
+    }
+    static func deliveryPolicy() {
+        print("Delivery within 24 hours.")
+    }
+}
+class Drone {
+    var droneID: Int
+    var batteryLevel: Int
+    var location: String
+    init(droneID: Int, batteryLevel: Int, location: String) {
+        self.droneID = droneID
+        self.batteryLevel = batteryLevel
+        self.location = location
+    }
+    func startDelivery() {
+        print("Drone started delivery.")
+    }
+    func consumeBattery(_ amount: Int) {
+        batteryLevel -= amount
+        print("Battery Left: \(batteryLevel)%")
+    }
+}
+class MedicalDrone: Drone {
+    override func startDelivery() {
+        super.startDelivery()
+        print("Emergency Mode Activated!")
+    }
+}
+var package1 = DeliveryPackage(weight: 5)
+package1.changeDestination("Library")
+package1.markDelivered()
+print("Package Bill = \(package1.calculateBill())")
+DeliveryPackage.deliveryPolicy()
+print("Total Packages = \(DeliveryPackage.totalPackages)")
+let drone1 = Drone(droneID: 101, batteryLevel: 100, location: "Campus Gate")
+drone1.startDelivery()
+drone1.consumeBattery(20)
+let medical = MedicalDrone(droneID: 102, batteryLevel: 100, location: "Medical Block")
+medical.startDelivery()
+medical.consumeBattery(10)
+var package2 = package1
+package2.destination = "Hostel"
+print("Package1 Destination = \(package1.destination)")
+print("Package2 Destination = \(package2.destination)")
+let drone2 = drone1
+drone2.location = "Library"
+print("Drone1 Location = \(drone1.location)")
+print("Drone2 Location = \(drone2.location)")
