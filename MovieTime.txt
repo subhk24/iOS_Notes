@@ -1,0 +1,231 @@
+import UIKit
+
+let appName: String = "Movie Time"
+let movieName: String = "ABC"
+var TicketPrice: Int = 1500
+var numberOfTickets: Int = 200
+var ticketType: String
+var nameOfCustomer = "John"
+var totlePrice = TicketPrice * numberOfTickets
+if TicketPrice > 500 {
+    print("Customer gets a free popcorn")
+}
+switch TicketPrice {
+case 1000...1500:
+    ticketType = "VIP"
+    print("Customer booked a \(ticketType)")
+case 800...950:
+    ticketType = "Gold"
+    print("Customer booked a \(ticketType)")
+case 500...700:
+    ticketType = "Silver"
+    print("Customer booked a \(ticketType)")
+default:
+    ticketType = "Platinum"
+    print("Customer booked a \(ticketType)")
+}
+func getSummary(movieName: String, genre: String, ticketPrice: Int, ticketType:String) ->String{
+    return "Movie name: \(movieName) \nGenre: \(genre) \nTicket Price: \(ticketPrice) \nTicket Type: \(ticketType)"
+}
+print(getSummary(movieName: "How to loose a guy in 10 days", genre: "Comedy", ticketPrice: 800, ticketType: "Gold"))
+
+struct Movie{
+    let movieName: String
+    let numberOfTickets :Int
+    let ticketPrice : Int
+    func displayMovieDetails(){
+        print("Movie Name: \(movieName), Number of tickets: \(numberOfTickets), Ticket Price: \(ticketPrice)")
+    }
+}
+let movie1 = Movie(movieName: "Mean Girls", numberOfTickets: 400, ticketPrice: 700)
+let movie2 = Movie(movieName: "Cruella", numberOfTickets: 700, ticketPrice: 600)
+movie1.displayMovieDetails()
+movie2.displayMovieDetails()
+//func displayMovieDetails(movieName: String, numberOfTickets: Int, ticketPrice: Int){
+//    print("Movie name: \(movieName) \nTicket Price: \(ticketPrice) has \(numberOfTickets) tickets left")
+// }
+
+
+struct Car{
+    var model: String
+}
+let car = Car(model: "Audi")
+func carInfo(){
+    
+}
+struct Odometer{
+    var count: Int
+    init(count: Int) { //initializer of Odometer baki languages me isko constructor bolte
+// self.name = name present inside the structure and name is the name picked from the function
+        self.count = count //2 counts ka access hai 1 is property and 2nd is arguement name. property ke aage self use kiya taki differentiate krr ske
+            // memberwise and default initializers
+        // default initializer struct me hi define krr dete hai value like var count: Int = 5
+        //memberwise me hum instance me value assign krte hai
+    }
+}
+//instance of Odometer
+let odometer1 = Odometer(count: 100)
+
+struct Person{
+    var name: String
+    init(name: String){
+        self.name = name //simply constructor banaya
+    }
+}
+var person1 = Person(name: "Subhdeep Kaur")
+
+struct BankAccount{
+    var accountNumber : Int
+    var balance : Double = 0
+        //yaha init nhi use krege cuz humne instance me balance ki value default hai
+}
+let bankAccount1 = BankAccount(accountNumber: 7536)
+
+//custom initializer me hum values nhi daalte simple jaise this.car = car krte the vesse hoga
+struct Temprature{
+    var celcius: Double
+    init(fahreniet: Double){ //custome initializer bna rhe hai taki hum F me temp krr ske
+        celcius = (fahreniet-32) / 1.8
+    }
+    init(celcius: Double){
+        self.celcius = celcius
+    }
+}
+let tempInF = Temprature(fahreniet: 36)
+let tempInC = Temprature(celcius: 20)
+
+//Instance Method
+struct Size{
+    var width: Double
+    var height: Double
+    func area() -> Double{
+        width*height
+    }
+}
+var someSize = Size(width: 6, height: 8)
+let result = someSize.area()
+print(result)
+
+//Mutating methods
+struct ABC{
+    var count: Int = 0
+    // normal method se hum properties ko change ni krr skte to hume method ko mutating bnanae pdta hai
+    mutating func increaseCoutByOne(){
+        count += 1
+    }
+    mutating func increaseCount(value: Int){
+        count += value
+    }
+}
+var abc = ABC()
+abc.increaseCount(value: 5)
+print(abc.count)
+abc.increaseCoutByOne()
+print(abc.count)
+
+
+struct Temp{
+    var celsius: Double
+    var fahrenheit: Double
+    var kelvin: Double
+    init(celsius: Double){ //stored property
+        self.celsius = celsius
+        fahrenheit = celsius * 1.8 + 32
+        kelvin = celsius + 273.15
+    }
+    init(fahrenheit: Double){
+        self.fahrenheit = fahrenheit
+        celsius = (fahrenheit-32) / 1.8
+        kelvin = celsius + 273.15
+    }
+    init(kelvin: Double){
+        self.kelvin = kelvin
+        celsius = kelvin - 273.15
+        fahrenheit = celsius * 1.8 + 32
+    }
+}
+let temp = Temp(celsius: 67.3)
+print(temp.celsius)
+print(temp.kelvin)
+print(temp.fahrenheit)
+
+
+//Computed properties are those properties that can be computed on other properties but inko space ni milti memory me
+//Stored properties ko memory milti hai space milti hai
+//computed property me var hi use krege
+struct T{
+    let celcius: Double //stored property
+    var fahrenheit: Double { //computed property
+        celcius * 1.8 + 32
+    }
+    var kelvin: Double{ //computed property
+        celcius + 273.15
+    }
+}
+var t = T(celcius: 67.3) //hum sirf stored properties se hi instance bna skte hai tbhi hum instance fahrenheit ya kelvin se instance nhi bna skte vrna error aa jayega
+print(t.fahrenheit)
+print(t.celcius)
+
+//property observers = property observe krr skte hai with this method
+// we can only observe only stored properties computed ko nhi krr skte
+// willSet and didSet
+
+
+struct A{
+    var num1: Double{
+        willSet{
+            //have access to newValue, yeh property change hone se pehle use hota hai mtlb abhi hone valli hai property abhi hui ni
+            print("Value is going to change to \(newValue)")
+            
+        }
+        didSet{
+            //have access to oldValue, yeh property change hone ke baad use hota hai means change ho chuki hai property
+            print("Value was \(oldValue) earlier")
+        }
+    }
+}
+var num = A(num1: 10)
+num.num1 = 50
+
+struct B {
+    var temperature: Int = 0 {
+        willSet {
+            if newValue == 45 {
+                print("Temp is too hot outside")
+            }
+        }
+
+        didSet {
+            print("Value was \(oldValue) earlier")
+        }
+    }
+}
+var obj = B()
+obj.temperature = 30
+obj.temperature = 45
+
+
+struct C{
+    static var boilingPoint = 100.0
+    static func convertedFromFahrenheit(_ temperatureInFahrenheit: Double) -> Double {
+         (((temperatureInFahrenheit - 32) * 5)/9)
+    }
+}
+let boilingPoint = C.boilingPoint
+let currentTemprature = C.convertedFromFahrenheit(99)
+//let positiveNumver = abs(-4.14) //for finding absolute value abs is a type
+
+//Structures are of Value Type
+//Class are of refrence Type
+
+
+//Copying means Structures ki multiple copies bna skte hai
+struct Size1{
+    var width: Double
+    var height: Double
+}
+var firstSize = Size1(width: 10, height: 10)
+var secondSize = firstSize
+secondSize.width = 100
+print(secondSize.width)
+print(firstSize.width)
