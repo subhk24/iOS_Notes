@@ -1,0 +1,95 @@
+import UIKit
+
+//protocols helps u define blueprint of methods, properties and other requiremnets that suit a particular task or piece of funcitonality
+//protocols give u abstractions = reduce coupling
+// protocol can't be inherited it's adopted
+// if we adopt a protocol we have to implement the functions and properties of that protocol
+
+class Shoe: CustomStringConvertible{ //adopting a protocol agr is potocol ke functions and properties ko implement nhi krege to error aayega
+    let color: String
+    let size: Int
+    let hasLaces: Bool
+    init(color:String, size: Int, hasLaces: Bool){
+        self.color = color
+        self.size = size
+        self.hasLaces = hasLaces
+    }
+    var description: String{ //description sara likhna pdega cuz it's present in CustomStringConvertible
+        return "Shoe(color: \(color), size: \(size), hasLaces: \(hasLaces))"
+    }
+}
+var myShoe = Shoe(color: "Pink", size: 5, hasLaces: true)
+print(myShoe) //inside the class there's nothing that can handle to print the instance
+
+//agr comparable use krna pehle equatable hona chahiye pehle then it'll be comparable
+struct Employee: Equatable, Comparable{
+    let firstName: String
+    let lastName: String
+    let jobTitle: String
+    let phoneNumber: String
+    //agr == ka comparison krna hai to we use Equatable that'll compare 2 instances
+    static func == (lhs: Employee, rhs: Employee) -> Bool{
+        return lhs.firstName == rhs.firstName && lhs.lastName == lhs.lastName && lhs.jobTitle == rhs.jobTitle && lhs.phoneNumber == rhs.phoneNumber
+    }
+    static func < (lhs: Employee, rhs: Employee) -> Bool{
+        return lhs.lastName < rhs.lastName
+    }
+}
+struct Company{
+    let name: String
+    let employees: [Employee]
+}
+let employee1 = Employee(firstName: "Rich", lastName: "Dinh", jobTitle: "Senior Manager", phoneNumber: "415-555-7770")
+let employee2 = Employee(firstName: "Jenny", lastName: "Court", jobTitle: "CEO", phoneNumber: "415-555-7768")
+let employee3 = Employee(firstName: "Jenica", lastName: "Chong", jobTitle: "Front Desk", phoneNumber: "415-555-7765")
+let employee4 = Employee(firstName: "Trev", lastName: "Smith", jobTitle: "Sales Lead", phoneNumber: "415-555-7772")
+let employee5 = Employee(firstName: "Rigo", lastName: "Rangel", jobTitle: "Accountant", phoneNumber: "415-555-7771")
+let employees = [employee1, employee2, employee3, employee4, employee5]
+let sortedEmployees = employees.sorted(by:>)
+for employee in sortedEmployees {
+    print(employee)
+}
+
+//if ur structure is Codable it can be easily converted in JSON
+
+//making ur own protocol
+protocol FullyNamed{
+    var fullName: String {get}
+    func sayFullName() //jbb khudki protocol bnate hai to function me nhi likhna pdta ki kya krr ra
+}
+struct Person: FullyNamed{ //we are adopting the protocol here
+    var firstName: String
+    var lastName: String
+    var fullName: String{
+        return "\(firstName) \(lastName)"
+    }
+    func sayFullName() {
+        print(fullName)
+    }
+}
+
+//extension = extend a class
+
+extension String{ //extending the String class of Swift
+    static var name: String{
+        return "New Data"
+    }
+    var details: String{
+        return "\(self)"
+    }
+}
+print(String.name)
+let str = "Hi Swift"
+print(str.details)
+
+//type methods = method which updates itself by using mutating keyword
+
+extension Int{
+    func triple() -> Int{
+        return self * 3
+    }
+}
+
+let val = 5
+print(val.triple())
+
