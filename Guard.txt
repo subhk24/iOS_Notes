@@ -1,0 +1,64 @@
+import UIKit
+
+//guard is also a control flow statement that exits the statement earlier
+//nested if else = pyramid tomb cuz vo > ki form bnata hai
+//the solution is we use guard
+
+//syntax of guard:
+//guard condition else {
+// false: execute some code
+//}
+//agr vo condition tru then nothing happens and next block me chla jayega
+//empty return likhna zruri hai taki block se bahar aa jaye
+
+func divide(_ number: Double, _by divisor: Double){
+    guard divisor != 0.0 else{
+        return
+    }
+    let result = number/divisor
+    print(result)
+}
+divide(6.0, _by: 2.0)
+
+//safely unwrapping optionals 2 ways = if let, guard let
+//guard is different to guard let , guard let wrap krta hai where guard is another version of if-else
+
+//variables inside the block of code = if let
+//variables outside the block of code = guard let
+
+
+
+//Scope
+//global and local scope
+
+//variable shadowing = variable inside local scope shadows the global variable even if it's constant
+let point = 100
+for index in 1...3{
+    let point = 200
+    print("Loop \(index) and \(point)")
+}
+print("Global scope: \(point)")
+//initializers initialises the attributes of a structure/class
+
+//self.name = name -> self.name = name present inside the structure and name is the name picked from the function
+
+//Enumeration hum tbb use krte hai jbbb we have only limites values for a variable like agr String hota to we can put any value that's why we use enumeration
+//Enum is basically type safe
+enum CompassPoint{
+    case north, east, south, west
+}
+var compassHeading:CompassPoint = .north
+compassHeading = .west
+if compassHeading == .west{
+    print("I am heading west")
+}
+
+enum Genre{
+    case animated, action, romance, documentry, biography, thriller
+}
+struct Movie{
+    var name: String
+    var releaseYear: Int?
+    var genre: Genre
+}
+let movie = Movie(name: "Warewolfs", releaseYear: 2026, genre: .action)
