@@ -1,0 +1,184 @@
+import UIKit
+
+let arr = [2, 4, 6, 8, 5, 7]
+print(arr.contains(5))
+
+//var arr1: [Int] = []
+//var arr2 = Array<Int> = [] to make this dic = var arr2 = Dictonary<String: Int> = [:]
+var arr3 = [Int]()
+
+var arr1 = [Int](repeating: 0, count: 100)
+let count = arr1.count
+if arr1.isEmpty{
+    
+}
+//append
+var names = ["Amy"]
+names.append("Joe")
+names += ["Subh", "Subhdeep"]
+print(names)
+names.remove(at: 2)
+print(names)
+names.removeLast()
+print(names)
+//treverse
+var arr4 = [Int](repeating: 22, count: 3)
+print(arr4)
+print(arr4.count)
+print(arr3.isEmpty)
+arr4.append(67)
+print(arr4)
+arr4[1] = 21
+arr4.insert(4, at: 2)
+arr4.insert(contentsOf: [0, 9], at : 1)
+arr4.insert(contentsOf: arr1, at: 3)
+print(arr4)
+
+let ticTacToe = [[0, 1, 0], [1, 0, 1], [1, 1, 0]]
+print(ticTacToe[1][1])
+//Dictionary = like hashmaps [key1 : value1, key2: value2]
+//var myDic = [String: Int]()
+//var myDic = Dictionary<String, Int>()
+//var myDic: [String: Int] = [:]
+//like hashmaps yaha bhi order matter in krta
+//swift is case sensitive
+var dic = ["Subh":500, "Shubham":600, "Subhdeep":850]
+dic["Jasleen"] = 250
+//agr update krni ho value
+dic.updateValue(650, forKey: "Shubham")
+print(dic)
+
+var scores = ["Richard": 500, "Luke": 400, "Cherly": 800]
+let players = Array(scores.keys)
+let nums = Array(scores.values)
+
+struct Book{
+    var name: String?
+    var publicationYear: Int? // agr nil value denge to error ni aayega yaha
+    //? is an optional value, now the publicationYear is an optional Int type now
+}
+let firstBook = Book(name: "First Book", publicationYear: 2023)
+let secondBook = Book(name: "Second Book", publicationYear: 2025)
+let thirdBook = Book(name: "Third Book", publicationYear: nil)
+
+var a : Int? = 10
+a = nil
+a = 20
+print(a)
+//print(a * 4) cuz a is an optional int that's why arithematic operations nhi honge
+
+//unwrapping optional value is used by !
+//print(thirdBook.publicationYear!) //forcefully unwrap krr re hai yaha tbb use krni yeh jbb hmme ptta hai nill value nhi aa skti vrna optional binding hi krni
+//__lldb_expr_805/Collections.playground:71: Fatal error: Unexpectedly found nil while unwrapping an Optional value
+//yeh error aara
+//abb hum optional value ko handle krne ke liye if else use krege
+if thirdBook.publicationYear != nil{ //forcefully unwrap krne ki koshish krege to application crash ho jayegi
+    print(thirdBook.publicationYear!)
+} else{
+    print("It contains a nil value")
+}
+
+//optional binding = instead of using ! forcefull unwrapping we use optional binding using the let keyword
+//optional data type agr nill nhi hai to use int type me convert krr deta
+if let unwrappedValue = firstBook.publicationYear{
+    print(unwrappedValue)
+}
+if let unwrappedName = secondBook.name{
+ print(unwrappedName)
+}
+if let unwrappedValue = secondBook.publicationYear{
+    print(unwrappedValue)
+}
+if let unwrappedName = thirdBook.name{
+    print(unwrappedName)
+    if let unwrappedValue = thirdBook.publicationYear{
+        print(unwrappedValue) //no output cuz it's nil
+    }
+}
+
+
+let string: String = "123"
+let anotherString: String = "Subhdeep"
+let intValue = Int (string) //yeh string tha jisko hum int me convert krr re the tbhi isko optional me convert kr diya but agr hum kisi string ko convert krne ki koshish krte to nil output aata
+let value = Int(anotherString)
+print(intValue) //int
+print(value) //nil
+
+
+//we can even  put optional in functions
+//example = func printFullName(firstName: String, middleName: String?, lastName: String)
+//struct Name{
+//    var firstName: String
+//    var middleName: String?
+//    var lastName: String
+//}
+//var name1 = Name(firstName: "Subh", lastName: "Kaur")
+//var name2 = Name(firstName: "Subh", middleName: "Deep", lastName: "Kaur")
+//if let unwrappedName = name1.middleName{
+//    print("\(name1.firstName) \(unwrappedName) \(name1.lastName)")
+//} else{
+//    print("\(name1.firstName) \(name1.lastName)")
+//}
+//if let unwrappedName = name2.middleName{
+//    print("\(name2.firstName) \(unwrappedName) \(name2.lastName)")
+//} else{
+//    print("\(name2.firstName) \(name2.lastName)")
+//}
+
+func printFullName(firstName: String, middleName: String?, lastName: String){
+    if let unwrappedName = middleName{
+        print("\(firstName) \(unwrappedName) \(lastName)")
+    } else{
+        print("\(firstName) \(lastName)")
+    }
+}
+printFullName(firstName: "Subhdeep", middleName: nil, lastName: "Kaur")
+printFullName(firstName: "Subh", middleName: "Deep", lastName: "Kaur")
+
+//Failable initializers = initializers that fail in some cases (basically when the value jo hmme nhi chahiye to usko fai krvade)
+struct Toddler{
+    var name: String
+    var monthsOld: Int
+    init?(name:String, monthsOld: Int){ //init? is a failable initializer agr ? na lgate vo normal initalizer bnn jata
+        if monthsOld < 12 || monthsOld > 36 {
+            return nil //should return nill failable initializer me himme ek baar nil return krvana hi hota
+        }
+        self.name = name
+        self.monthsOld = monthsOld
+    }
+}
+//let toddler = Toddler(name: "Cutie", monthsOld: 6) //not a toddler cuz toddler's age is from
+let toddler = Toddler(name: "Chris", monthsOld: 12)
+print(toddler)
+
+if let toddler = toddler{
+    print("Toddler's name is \(toddler.name) and age is \(toddler.monthsOld)")
+} else{
+    print("That ain't a toddler")
+}
+
+struct Person{
+    var name: String
+    var residence: Residence?
+}
+struct Residence{
+    var address: Address?
+}
+struct Address{
+    var buildingName: String?
+    var streetName: String?
+    var apartmentNumber: String?
+}
+let address = Address(buildingName: "ABC", streetName: "XYZ", apartmentNumber: "123")
+let residence = Residence(address: address)
+let person = Person(name: "Subhdeep", residence: residence)
+//print(person.residence?.address?.apartmentNumber) aese optional value aari thi to usko unwrap krna pdta issi liye we used if let optional binding
+if let residence = person.residence, let address = residence.address, let apartmentNumber = address.apartmentNumber{ //nested if ki jgah aese likh skte
+    print(apartmentNumber)
+}
+let anotherPerson = Person(name: "Shubham", residence: Residence(address: Address(buildingName: "PQR", streetName: "qwe", apartmentNumber: "673"))) //agr koi aur person ka bnana ho
+//agr isko aur short krna ho we use optional chaining
+//optional chaining me agr khi nil aara hai to vo uske bahar aa jayega and this is the most efficient way
+if let apartmentNumber = person.residence?.address?.apartmentNumber{ //optional chaining
+    print("They live in apartment number \(apartmentNumber)")
+}
