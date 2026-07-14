@@ -1,0 +1,74 @@
+import UIKit
+
+let greeting = "It is traditional in programming to print \"Hello, World!\""
+print(greeting)
+var newText = """
+Hello, World!
+Multiline text
+"""
+print(newText)
+
+var myString = ""
+if myString.isEmpty{
+    print("The string is empty")
+}
+var string1 = "Hello"
+var string2 = ", World!"
+var mystring = string1 + string2
+print(mystring)
+mystring += greeting
+print(mystring)
+let name = "Subhdeep"
+let age = 20
+//print("\(name) is \(age) years old")
+let a = 5
+let b = 5
+print("Sum of \(a) & \(b) is \(a+b)")
+let str1 = "Subhdeep"
+let str2 = "subhdeep"
+if str1 == str2 {
+    print("Both strings are equal")
+} else{
+    print("Ain't equal")
+}
+
+var str3 = "Greetings"
+if str3.lowercased() == "greetings" {
+    print("Same")
+}
+ 
+let str4 = "Hello! World"
+if str4.hasPrefix("Hello!"){
+    print("The string starts with the prefix \"Hello!\"")
+}
+
+let str5 = "Hi! Sophie, my name is Amy"
+if str5.contains("my name is"){
+    print("The string have the substring \"my name is\"")
+}
+
+let namee = "Subhdeep"
+print(namee.count)
+let password = "2412"
+let count = namee.count
+if password.count < 8{
+    print("The password is too short. Passwords should have at least 8 characters.")
+}
+print(namee[name.startIndex])
+print(name[name.index(before: name.endIndex)])
+print(str5.replacingOccurrences(of: "my", with: "My"))
+
+let fish = "🐠"
+print(fish)
+
+func triple(value: Int){
+    let result = value * 3
+    print("If you multiply \(value) by 3, the result is \(result)")
+}
+triple(value: 3)
+
+func add(_ a:Int,_ b: Int) -> Int{
+    a + b
+}
+let r = add(1, 21)
+print(r)
