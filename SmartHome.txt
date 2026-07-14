@@ -1,0 +1,15 @@
+import UIKit
+
+struct SmartLight{
+    var roomName: String
+    var brightness: Int
+    var powerStatus: Bool
+    var color: String
+}
+let smartLight1 = SmartLight(roomName: "Living Room", brightness: 100, powerStatus: true, color: "White")
+func lightDescription(){
+    
+}
+func energyConsumption(){
+    
+}
