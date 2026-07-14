@@ -1,0 +1,11 @@
+import UIKit
+
+var greeting = "Hello, playground"
+
+//As i find it really difficult to find questions that are important for some topic online there are soo many websites and i can't really find the questions to the topics i wanna practice and if i use ai they js give sooo basic questions that even a kid can do so i wanna make an app where you can type the topic the subject and your level and the app will give you questions according to that
+var topicName : String
+var difficultyLevel : String
+var notifications : Bool
+var numberOfQuesitons : Int
+var moveToNextLevel : Bool
+var numberOfQuestionsDoneWeekly : Int 
