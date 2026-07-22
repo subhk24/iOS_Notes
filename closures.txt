@@ -1,0 +1,78 @@
+import UIKit
+
+//A closure is a block of code you can store in a variable or pass to another function, just like any other value.
+//in is called closure introduction keyword -> tells us that after this the body of code starts
+
+//passing a closure as variable
+let Sum = { (a: Int, b: Int) -> Int in
+        return a + b
+}
+print(Sum(1, 2))
+
+//passing a clousure as parameters
+var arr = [34, 56, 32, 54, 83, 28]
+print(arr)
+let sortArr = arr.sorted{ (x: Int, y: Int) -> Bool in //yaha last me closure hai as a parameter
+        return x<y //aese ascending order hoga x>y to decsending hoga = trailing closure
+    //trailing closure me hum curly braces use krte hai
+}
+print(sortArr)
+
+
+var result = arr.reduce(0, { partialResult, x in //reduce single value me convert krta hai
+    return partialResult + x
+})
+print(result)
+
+
+func test(name: String, completion: () -> Void, rollNo: Int){ //yaha last me closure ni hai 2nd pr hai that's why aese define kiya
+    print(name)
+    print(rollNo)
+    completion()
+}
+test(name: "Subhdeep", completion: {
+    print("Closure")
+}, rollNo: 94)
+
+//func (Bool, {success when boolean value is true}, {fail when boolean value is false})
+func practice(win: Bool, success: () -> Void , fail: () -> Void){
+    if win{
+        success()
+    }
+    else{
+        fail()
+    }
+}
+practice(win: true, success: {
+    print("Success")
+}, fail: {
+    print("Failure")
+})
+
+
+var arr1 = [34, 56, 32, 54, 83, 28]
+let sorted = arr1.sorted{
+   $0 > $1 //descending For ascending order we use $0 < $1
+}
+print(sorted)
+
+let firstNames = ["Subhdeep", "Shubham", "Jasleen", "Simar"]
+let updatedNames = firstNames.map{$0 + " Smith"}
+print(updatedNames)
+
+let numbers = [4, 8, 15, 16, 23, 42]
+let numbersLessThan20 = numbers.filter{$0 < 20}
+print(numbersLessThan20)
+
+
+let nums = [8, 6, 7, 5, 3, 0, 9]
+var total = 0
+
+for num in nums{
+    total += num
+}
+print(total)
+var totalSum = nums.reduce(0,+)
+print(totalSum)
+
+  
